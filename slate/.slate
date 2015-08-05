@@ -1,0 +1,99 @@
+config defaultToCurrentScreen true
+config nudgePercentOf screenSize
+config resizePercentOf screenSize
+config windowHintsIgnoreHiddenWindows false
+config windowHintsShowIcons true
+config windowHintsSpread true
+config windowHintsSpreadSearchWidth 100
+config windowHintsSpreadSearchHeight 100
+config modalEscapeKey esc
+
+#hyper key setup
+alias hyper ctrl;shift;alt;cmd
+
+#shortcut to reload slate settings
+bind 1:${hyper} relaunch
+
+# Abstract positions
+alias full move screenOriginX;screenOriginY screenSizeX;screenSizeY
+alias lefthalf move screenOriginX;screenOriginY screenSizeX/2;screenSizeY
+alias righthalf move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY
+alias topleft corner top-left resize:screenSizeX/2;screenSizeY/2
+alias topright corner top-right resize:screenSizeX/2;screenSizeY/2
+alias bottomleft corner bottom-left resize:screenSizeX/2;screenSizeY/2
+alias bottomright corner bottom-right resize:screenSizeX/2;screenSizeY/2
+
+# Numpad location Bindings
+bind pad1:${hyper} ${bottomleft}
+bind pad2:${hyper} push bottom bar-resize:screenSizeY/2
+bind pad3:${hyper} ${bottomright}
+bind pad4:${hyper} ${lefthalf}
+bind pad5:${hyper} ${full}
+bind pad6:${hyper} ${righthalf}
+bind pad7:${hyper} ${topleft}
+bind pad8:${hyper} push top bar-resize:screenSizeY/2
+bind pad9:${hyper} ${topright}
+
+# Grid
+bind g:${hyper} grid padding:5 0:6,2 1:6,2 2:2,6 
+
+# Sent to next screen
+bind n:${hyper} throw next resize
+
+# Directional keys location Bindings
+bind down:${hyper} push bottom bar-resize:screenSizeY/2
+bind left:${hyper} ${lefthalf}
+bind up:${hyper} ${full}
+bind right:${hyper} ${righthalf}
+
+# Window Hints
+bind x:${hyper} hint ASDFQWERZXCV
+bind 1:cmd hint ASDFQWERZXCV
+
+# Monitor Aliases
+alias mon-laptop        0
+alias mon-apple         1
+alias mon-dell          2
+
+# Concrete positions
+alias 1-full        move screenOriginX;screenOriginY screenSizeX;screenSizeY         ${mon-laptop}
+alias 1-left        move screenOriginX;screenOriginY screenSizeX/2;screenSizeY         ${mon-laptop}
+alias 1-right	    move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY         ${mon-laptop}
+alias 1-notes	    move screenOriginX+351;screenOriginY+125 719,568 ${mon-laptop}
+alias 2-left        move screenOriginX;screenOriginY screenSizeX/2;screenSizeY         ${mon-apple}
+alias 2-right       move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY         ${mon-apple}
+alias 2-righttop    move screenOriginX+screenSizeX/2;screenOriginY screenSizeX/2;screenSizeY/2       ${mon-apple}
+alias 2-rightbottom move screenOriginX+screenSizeX/2;screenOriginY+screenSizeY/2    screenSizeX/2;screenSizeY/2       ${mon-apple}
+alias 2-leftbottom  move screenOriginX;screenOriginY+screenSizeY/2    screenSizeX/2;screenSizeY/2       ${mon-apple}
+alias 2-lefttop     move screenOriginX;screenOriginY screenSizeX/2;screenSizeY/2       ${mon-apple}
+alias 3-top         move screenOriginX;screenOriginY screenSizeX;screenSizeY/2       ${mon-dell}
+alias 3-bottom      move screenOriginX;screenOriginY+screenSizeY/2    screenSizeX;screenSizeY/2       ${mon-dell}
+alias 3-top3rd      move screenOriginX;screenOriginY screenSizeX;900       ${mon-dell}
+alias 3-middle3rd   move screenOriginX;screenOriginY+900 screenSizeX;screenSizeY/3       ${mon-dell}
+alias 3-bottom3rd   move screenOriginX;screenOriginY+1470 screenSizeX;screenSizeY/3      ${mon-dell}
+
+
+# 3 Monitor layout
+layout 3monitor 'iTerm':MAIN_FIRST 		${2-rightbottom} | ${1-left}
+layout 3monitor 'Google Chrome':MAIN_FIRST	${2-righttop} | ${2-leftbottom}
+layout 3monitor 'Slack':MAIN_FIRST		${1-full}
+layout 3monitor 'Amazon Music':MAIN_FIRST		${1-full}
+layout 3monitor 'Safari':SORT_TITLE		${3-bottom3rd} | ${3-top3rd} | ${3-middle3rd}
+layout 3monitor 'Sublime Text 2':REPEAT		${2-lefttop}
+layout 3monitor 'Notes':REPEAT			${1-notes}
+
+# 2 Monitor layout
+layout 2monitor 'iterm':MAIN_FIRST		${1-left}
+
+# monitor shortcuts
+bind 3:${hyper} layout 3monitor
+bind 2:${hyper} layout 2monitor
+
+# App bindings
+bind c:${hyper} focus 'Google Chrome'
+bind s:${hyper} focus 'Slack'
+bind e:${hyper} focus 'Evernote'
+bind y:${hyper} focus 'YNAB 4'
+bind m:${hyper} focus 'Mail'
+bind t:${hyper} focus 'iTerm'
+#bind o:${hyper} focus 'Path Finder'
